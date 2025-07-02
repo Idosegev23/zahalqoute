@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצעת מחיר – סדנת כלים דיגיטליים ו-AI למנהלי מטה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background-color: #fafafa;
+            color: #193752;
+            line-height: 1.7;
+            direction: rtl;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            margin: 80px 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 0 60px 0;
+            border-bottom: 1px solid rgba(245, 162, 25, 0.2);
+        }
+
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 32px;
+        }
+
+        .main-title {
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+            line-height: 1.3;
+            color: #000000;
+        }
+
+        .header-details {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #666666;
+        }
+
+        .date {
+            font-weight: 400;
+            color: #000000;
+        }
+
+        h2 {
+            color: #193752;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: #F5A219;
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: #193752;
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin: 24px 0 16px 0;
+        }
+
+        .about-section {
+            background: rgba(245, 162, 25, 0.04);
+            padding: 48px 32px;
+            text-align: center;
+            border: 1px solid rgba(245, 162, 25, 0.15);
+            border-radius: 12px;
+        }
+
+        .workshop-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .workshop-content li {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(25, 55, 82, 0.02);
+            border-radius: 8px;
+            border-right: 3px solid rgba(245, 162, 25, 0.3);
+        }
+
+        .workshop-content li:last-child {
+            border-bottom: none;
+        }
+
+        .workshop-content strong {
+            color: #B5291D;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .benefit-item {
+            background: #ffffff;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid rgba(25, 55, 82, 0.08);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .benefit-item:hover {
+            border-color: rgba(245, 162, 25, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .structure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .structure-item {
+            background: rgba(25, 55, 82, 0.04);
+            padding: 28px 16px;
+            text-align: center;
+            border: 1px solid rgba(25, 55, 82, 0.1);
+            border-radius: 10px;
+        }
+
+        .structure-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #F5A219;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .pricing-section {
+            background: rgba(181, 41, 29, 0.03);
+            text-align: center;
+            padding: 48px 32px;
+            border: 1px solid rgba(181, 41, 29, 0.15);
+            border-radius: 12px;
+        }
+
+        .price-highlight {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #B5291D;
+            margin: 32px 0;
+        }
+
+        .included-list {
+            background: rgba(25, 55, 82, 0.03);
+            padding: 32px;
+            margin: 32px 0;
+            border: 1px solid rgba(25, 55, 82, 0.1);
+            border-radius: 10px;
+        }
+
+        .included-list ul {
+            list-style: none;
+        }
+
+        .included-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .included-list li:last-child {
+            border-bottom: none;
+        }
+
+        .included-list li::before {
+            content: "• ";
+            color: #000000;
+            font-weight: normal;
+            margin-left: 8px;
+        }
+
+        .cta-section {
+            background: rgba(245, 162, 25, 0.04);
+            text-align: center;
+            padding: 64px 32px;
+            border: 1px solid rgba(245, 162, 25, 0.2);
+            border-radius: 12px;
+        }
+
+        .cta-button {
+            background: #193752;
+            color: white;
+            border: 2px solid #193752;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 24px 0;
+            font-family: 'Heebo', sans-serif;
+            border-radius: 8px;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #193752;
+            border-color: #F5A219;
+        }
+
+        .contact-info {
+            background: #193752;
+            color: white;
+            text-align: center;
+            padding: 48px 32px;
+            border-radius: 12px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid rgba(245, 162, 25, 0.4);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            background: #F5A219;
+            color: #193752;
+            border-color: #F5A219;
+        }
+
+        .success-message {
+            display: none;
+            background: #193752;
+            color: white;
+            padding: 24px;
+            text-align: center;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 1001;
+        }
+
+        .modal h3 {
+            color: #193752;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #193752;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(25, 55, 82, 0.2);
+            border-radius: 8px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            background: rgba(25, 55, 82, 0.01);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #F5A219;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid;
+        }
+
+        .modal-btn-primary {
+            background: #193752;
+            color: white;
+            border-color: #193752;
+        }
+
+        .modal-btn-primary:hover {
+            background: white;
+            color: #193752;
+        }
+
+        .modal-btn-secondary {
+            background: white;
+            color: #666;
+            border-color: #ddd;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #f5f5f5;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(25, 55, 82, 0.1);
+            color: #193752;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 1.75rem;
+            }
+            
+            .section {
+                margin: 48px 0;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .structure-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section,
+            .pricing-section,
+            .cta-section,
+            .contact-info {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .main-title {
+                font-size: 1.5rem;
+            }
+            
+            .structure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 48px 0 40px 0;
+            }
+
+            .modal {
+                padding: 24px;
+                width: 95%;
+            }
+
+            .modal h3 {
+                font-size: 1.25rem;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- כותרת ראשית -->
+        <div class="header">
+            <img src="https://res.cloudinary.com/dsoh3yteb/image/upload/v1723558434/NewLogo_BLANK-Recovered_x4kgew.png" alt="לוגו" class="logo">
+            <h1 class="main-title">הצעת מחיר – סדנת כלים דיגיטליים ו-AI למנהלי מטה</h1>
+            <div class="header-details">מאת: עידו שגב</div>
+            <div class="header-details">לכבוד: ארגון נכי צה"ל</div>
+            <div class="header-details">תאריך: <span class="date" id="currentDate"></span></div>
+        </div>
+
+        <!-- אודות המרצה -->
+        <div class="section about-section">
+            <h2>עידו שגב</h2>
+            <p>מומחה ליישומי בינה מלאכותית בעסקים, מרצה ומוביל סדנאות להטמעת חדשנות טכנולוגית במגזר הציבורי והפרטי.</p>
+            <p>במהלך השנים ליוויתי עשרות ארגונים בשילוב כלים חכמים לשיפור תהליכים, חיסכון בזמן, קבלת החלטות חכמה והנגשת מידע.</p>
+            <p>אני מאמין שכל אדם יכול להשתמש ב-AI ככלי עבודה יומיומי – גם בלי רקע טכנולוגי.</p>
+        </div>
+
+        <!-- מטרת הסדנה -->
+        <div class="section">
+            <h2>מטרת הסדנה</h2>
+            <p>הקניית כלים מעשיים וחדשניים לניהול חכם ויעיל של עבודת המטה באמצעות בינה מלאכותית וכלים דיגיטליים מתקדמים – תוך התאמה אישית לצרכים הארגוניים ולאתגרים היומיומיים של המשתתפים.</p>
+        </div>
+
+        <!-- תכני הסדנה -->
+        <div class="section workshop-content">
+            <h2>תכני הסדנה</h2>
+            <p>במהלך הסדנה נלמד:</p>
+            <ul>
+                <li>
+                    <strong>שימוש חכם בעוזרי AI (ChatGPT, Claude, Perplexity, Grok):</strong>
+                    מענה על שאלות, כתיבה, סיכום, ניסוח, שיפור טקסטים
+                </li>
+                <li>
+                    <strong>כלי תחקיר וניהול ידע (NotebookLM, Napkin.ai):</strong>
+                    ניתוח מסמכים, תחקור רב-מקורות, חיבור רעיונות
+                </li>
+                <li>
+                    <strong>כלים לעבודה משרדית:</strong>
+                    תיאום וסיכום פגישות עם TimeOS, ניהול יומנים, משימות ותזכורות
+                </li>
+                <li>
+                    <strong>הפקת תוכן ויזואלי מהיר:</strong>
+                    בניית מצגות עם Gamma.app<br>
+                    יצירת תמונות עם Ideogram, Reve.art ו-Sora
+                </li>
+                <li>
+                    <strong>שילוב הכלים בעבודה היומיומית של כל אגף:</strong>
+                    כספים, לוגיסטיקה, שיווק, תפעול, משאבי אנוש, תיעוד טיפולי ועוד
+                </li>
+                <li>כל מפגש כולל גם תרגול מעשי – עם קבצים ודוגמאות מתוך עולם התוכן של המשתתפים.</li>
+            </ul>
+        </div>
+
+        <!-- תועלות לארגון -->
+        <div class="section">
+            <h2>תועלות לארגון ולמשתתפים</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">חיסכון בזמן ובמשימות שוטפות</div>
+                <div class="benefit-item">קבלת החלטות מהירה ומבוססת מידע</div>
+                <div class="benefit-item">כתיבה ותכנון חכמים יותר</div>
+                <div class="benefit-item">הקלה על עומס קוגניטיבי וניסוחים</div>
+                <div class="benefit-item">פתיחת הראש לחשיבה חדשנית וניהול מבוסס כלים</div>
+                <div class="benefit-item">התאמה מלאה לתהליכים קיימים בארגון</div>
+            </div>
+        </div>
+
+        <!-- מבנה הסדנה -->
+        <div class="section">
+            <h2>מבנה הסדנה</h2>
+            <div class="structure-grid">
+                <div class="structure-item">
+                    <span class="structure-number">5</span>
+                    מספר מפגשים
+                </div>
+                <div class="structure-item">
+                    <span class="structure-number">2</span>
+                    אחת לשבועיים
+                </div>
+                <div class="structure-item">
+                    <span class="structure-number">3</span>
+                    שעות כל מפגש
+                </div>
+                <div class="structure-item">
+                    <span class="structure-number">15</span>
+                    משתתפים מומלץ
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <strong>מיקום:</strong> פרונטלי – במטה הארגון
+            </div>
+        </div>
+
+        <!-- עלות הסדנה -->
+        <div class="section pricing-section">
+            <h2>עלות הסדנה</h2>
+            <div>
+                <strong>עלות שעת הדרכה:</strong> 1,200 ₪ (כולל הכנה, חומרים ונסיעות)
+            </div>
+            <div class="price-highlight">סה"כ הסדנה (15 שעות): 18,000 ₪ + מע"מ</div>
+            
+            <div class="included-list">
+                <h3>המחיר כולל:</h3>
+                <ul>
+                    <li>בניית שאלון צרכים מותאם והפצתו</li>
+                    <li>התאמת התכנים לכלל המשתתפים לפי המענה</li>
+                    <li>הכנת מערך הדרכה ותרגול מעשי</li>
+                    <li>הקניית גישה לחומרים, כלים ודוגמאות</li>
+                    <li>ליווי מקצועי לאורך הסדנה</li>
+                    <li>הגעה לכל המפגשים (כולל נסיעות)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- תנאי תשלום -->
+        <div class="section">
+            <h2>תנאי תשלום</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin: 12px 0; padding: 16px; background: rgba(25, 55, 82, 0.02); border-radius: 6px; border-right: 2px solid rgba(245, 162, 25, 0.4);">50% בתחילת התהליך</li>
+                <li style="margin: 12px 0; padding: 16px; background: rgba(25, 55, 82, 0.02); border-radius: 6px; border-right: 2px solid rgba(245, 162, 25, 0.4);">50% בסיום המפגש האחרון</li>
+                <li style="margin: 12px 0; padding: 16px; background: rgba(25, 55, 82, 0.02); border-radius: 6px; border-right: 2px solid rgba(245, 162, 25, 0.4);">חשבונית תונפק כחוק</li>
+                <li style="margin: 12px 0; padding: 16px; background: rgba(25, 55, 82, 0.02); border-radius: 6px; border-right: 2px solid rgba(245, 162, 25, 0.4);">ניתן לספק אישור ביטוח ואישור ניכוי מס במקור במידת הצורך</li>
+            </ul>
+        </div>
+
+        <!-- קריאה לפעולה -->
+        <div class="section cta-section">
+            <h2>אישור הצעת המחיר</h2>
+            <p style="margin: 24px 0;">אשמח ללוות אתכם בתהליך משמעותי שיאפשר לארגון לעבור קפיצה דיגיטלית אמיתית – בגובה העיניים, בפרקטיקה, ובכלים שמתאימים לעבודה היומיומית של כל אחד ואחת.</p>
+            
+            <button class="cta-button" onclick="approveQuote()">אישור ההצעה</button>
+            
+            <div id="successMessage" class="success-message">
+                הצעת המחיר אושרה. ניצור קשר בהקדם.
+            </div>
+        </div>
+
+        <!-- פרטי קשר -->
+        <div class="contact-info">
+            <h2 style="color: white; border-bottom-color: #F5A219;">עידו שגב</h2>
+            <p>מוביל תחום בינה מלאכותית בעסקים</p>
+            <div class="contact-links">
+                <a href="tel:0547667775" class="contact-link">0547667775</a>
+                <a href="mailto:triroars@gmail.com" class="contact-link">triroars@gmail.com</a>
+                <a href="https://wa.me/972547667775" class="contact-link" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for approval form -->
+    <div id="approvalModal" class="modal-overlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h3>פרטי המאשר</h3>
+            <form id="approvalForm">
+                <div class="form-group">
+                    <label for="approverName">שם מלא *</label>
+                    <input type="text" id="approverName" name="approverName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="approverTitle">תפקיד *</label>
+                    <input type="text" id="approverTitle" name="approverTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="approverEmail">כתובת אימייל *</label>
+                    <input type="email" id="approverEmail" name="approverEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="approverPhone">טלפון</label>
+                    <input type="tel" id="approverPhone" name="approverPhone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="organizationDepartment">מחלקה/אגף</label>
+                    <input type="text" id="organizationDepartment" name="organizationDepartment">
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">הערות נוספות</label>
+                    <textarea id="notes" name="notes" placeholder="הערות, שאלות או בקשות מיוחדות..."></textarea>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn modal-btn-secondary" onclick="closeModal()">ביטול</button>
+                    <button type="submit" class="modal-btn modal-btn-primary">אישור סופי</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Set current date
+        function setCurrentDate() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                weekday: 'long'
+            };
+            const hebrewDate = now.toLocaleDateString('he-IL', options);
+            document.getElementById('currentDate').textContent = hebrewDate;
+        }
+
+        // Open approval modal
+        function approveQuote() {
+            document.getElementById('approvalModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('approvalModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('approvalForm').reset();
+        }
+
+        // Close modal when clicking on overlay
+        document.getElementById('approvalModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Handle form submission
+        document.getElementById('approvalForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('.modal-btn-primary');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'שולח...';
+            submitButton.disabled = true;
+            
+            try {
+                const formDataObj = {};
+                for (let [key, value] of formData.entries()) {
+                    formDataObj[key] = value;
+                }
+
+                const response = await fetch('https://hook.eu2.make.com/6qwapfnavfh2464dbm545tbse7o52yct', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: 'quote_approval',
+                        organization: 'ארגון נכי צה"ל',
+                        presenter: 'עידו שגב',
+                        workshop: 'סדנת כלים דיגיטליים ו-AI למנהלי מטה',
+                        date: new Date().toISOString(),
+                        amount: '18,000 ₪ + מע"מ',
+                        approver: formDataObj
+                    })
+                });
+
+                if (response.ok) {
+                    closeModal();
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.querySelector('.cta-button').style.display = 'none';
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                submitButton.textContent = 'שגיאה - נסה שוב';
+                setTimeout(() => {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 3000);
+            }
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('approvalModal').style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        // Initialize page
+        window.addEventListener('load', function() {
+            setCurrentDate();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
