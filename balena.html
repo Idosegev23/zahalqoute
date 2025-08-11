@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>הצעת מחיר – סדנת AI ואוטומציה לצוות Balena</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --fg: #193752;
+      --muted: #5a6a7b;
+      --line: rgba(25, 55, 82, 0.12);
+      --accent: #F5A219; /* warm amber */
+      --accent-2: #00b8a9; /* teal touch */
+      --danger: #B5291D;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Heebo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.7;
+      direction: rtl;
+    }
+
+    .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+    .header {
+      text-align: center;
+      padding: 80px 0 48px 0;
+      border-bottom: 1px solid rgba(245, 162, 25, 0.2);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0, 184, 169, 0.08);
+      border: 1px solid rgba(0, 184, 169, 0.25);
+      color: var(--fg);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .title { font-size: 2.1rem; font-weight: 700; margin-bottom: 20px; }
+
+    .meta { color: var(--muted); font-size: 0.98rem; }
+    .meta + .meta { margin-top: 6px; }
+    .meta .date { color: var(--fg); font-weight: 500; }
+
+    section { margin: 64px 0; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--fg);
+      position: relative;
+      margin-bottom: 18px;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      right: 0; bottom: -8px;
+      width: 44px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .subtle-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .kvs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 12px; }
+    .kv {
+      background: rgba(25, 55, 82, 0.03);
+      border: 1px solid var(--line);
+      border-right: 4px solid rgba(245, 162, 25, 0.55);
+      border-radius: 10px;
+      padding: 16px 14px;
+    }
+    .kv strong { display: block; font-weight: 600; margin-bottom: 6px; }
+    .kv span { color: var(--muted); }
+
+    ul.clean { list-style: none; }
+    ul.clean li { padding: 14px 0; border-bottom: 1px solid #eee; }
+    ul.clean li:last-child { border-bottom: none; }
+
+    .pill-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(0, 184, 169, 0.06);
+      border: 1px solid rgba(0, 184, 169, 0.25);
+      color: var(--fg);
+      font-size: 0.95rem;
+    }
+    .pill b { color: var(--fg); font-weight: 600; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--fg); }
+    .card p { color: var(--muted); }
+
+    .pricing { background: rgba(181, 41, 29, 0.03); border: 1px solid rgba(181, 41, 29, 0.15); border-radius: 14px; padding: 22px; }
+    .price { font-size: 2rem; font-weight: 700; color: var(--danger); margin: 8px 0 4px 0; }
+    .muted { color: var(--muted); }
+
+    .cta {
+      background: rgba(245, 162, 25, 0.05);
+      border: 1px solid rgba(245, 162, 25, 0.25);
+      border-radius: 14px;
+      padding: 32px;
+      text-align: center;
+    }
+    .cta p { margin-top: 8px; color: var(--muted); }
+    .cta .cta-btn {
+      margin-top: 16px;
+      background: var(--fg);
+      color: #fff;
+      border: 2px solid var(--fg);
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Heebo', sans-serif;
+    }
+    .cta .cta-btn:hover { background: #fff; color: var(--fg); border-color: var(--accent); }
+
+    .contact {
+      background: var(--fg);
+      color: #fff;
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+    }
+    .contact .links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+    .contact .links a {
+      color: #fff; text-decoration: none;
+      border: 1px solid rgba(245, 162, 25, 0.4);
+      border-radius: 8px; padding: 10px 14px;
+      transition: all 0.2s ease;
+    }
+    .contact .links a:hover { background: var(--accent); color: var(--fg); }
+
+    .success { display: none; margin-top: 16px; padding: 16px; border-radius: 8px; background: var(--fg); color: #fff; }
+
+    /* Modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(4px);
+    }
+    .modal {
+      position: fixed; z-index: 1001; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: #fff; border-radius: 16px; padding: 28px; width: 92%; max-width: 520px;
+      border: 1px solid var(--line);
+    }
+    .modal h3 { text-align: center; font-weight: 700; margin-bottom: 16px; }
+    .form-group { margin: 14px 0; }
+    label { display: block; margin-bottom: 6px; font-weight: 500; color: var(--fg); }
+    input, textarea, select {
+      width: 100%; padding: 12px 14px; border: 1px solid rgba(25,55,82,0.2);
+      border-radius: 10px; font-family: 'Heebo', sans-serif; font-size: 1rem; background: rgba(25,55,82,0.02);
+    }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent); }
+    textarea { min-height: 90px; resize: vertical; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .btn { padding: 12px 16px; border-radius: 10px; border: 2px solid; cursor: pointer; font-weight: 600; }
+    .btn.primary { background: var(--fg); color: #fff; border-color: var(--fg); }
+    .btn.primary:hover { background: #fff; color: var(--fg); }
+    .btn.ghost { background: #fff; color: var(--muted); border-color: #ddd; }
+    .btn.ghost:hover { background: #f5f5f5; }
+    .close-x { position: absolute; top: 10px; left: 12px; border: none; background: transparent; font-size: 24px; color: #8a8a8a; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .title { font-size: 1.75rem; }
+      section { margin: 48px 0; }
+      .cta { padding: 24px; }
+      .contact { padding: 22px; }
+      .modal { padding: 20px; width: 94%; }
+      .modal-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="eyebrow">הצעת מחיר</span>
+      <h1 class="title">סדנת AI ואוטומציה לצוות Balena</h1>
+      <div class="meta">מאת: עידו שגב</div>
+      <div class="meta">לכבוד: Balena</div>
+      <div class="meta">תאריך: <span class="date" id="currentDate"></span></div>
+    </header>
+
+    <section>
+      <h2>פרטי הסדנה</h2>
+      <div class="subtle-card">
+        <div class="kvs">
+          <div class="kv"><strong>פורמט</strong><span>פרונטלי (Hands-on) במשרדי Balena</span></div>
+          <div class="kv"><strong>משך כל מפגש</strong><span>4 שעות</span></div>
+          <div class="kv"><strong>מספר מפגשים</strong><span>2 או 3 (לבחירתכם)</span></div>
+          <div class="kv"><strong>עלות למפגש</strong><span>6,000 ₪ + מע"מ</span></div>
+          <div class="kv"><strong>שפת הסדנה</strong><span>עברית או אנגלית</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>מטרת הסדנה</h2>
+      <div class="subtle-card">
+        להעניק לצוות Balena כלים פרקטיים שישדרגו את תהליכי העבודה היומיומיים – משלב הפיתוח במעבדה,
+        דרך שיתוף המידע בין צוותים ועד להצגת המוצר לשותפים ולקוחות – באמצעות שילוב חכם של AI, אוטומציות וכלים דיגיטליים מתקדמים.
+      </div>
+    </section>
+
+    <section>
+      <h2>נקודות כאב שהסדנה תתמקד בפתרונן</h2>
+      <div class="subtle-card">
+        <ul class="clean">
+          <li>ניהול ותיאום בין גורמים שונים – צוותי פיתוח, עיצוב, שיווק ושיתופי פעולה גלובליים.</li>
+          <li>שיתוף חומרים בצורה מאובטחת ומהירה – קבצים גדולים, נתוני ניסויים ותיעוד תהליכים.</li>
+          <li>עומס ממשימות ידניות חוזרות – עדכון נתונים, שליחת דיווחים, ניהול משימות חוזרות.</li>
+          <li>העברת ידע פנימי בין צוותים עם שפות מקצוע שונות – מניעת טעויות ותקלות בתקשורת.</li>
+          <li>הפקת חומרים שיווקיים והצגות משכנעות במהירות – עבור לקוחות, משקיעים ושותפים.</li>
+          <li>שמירה על חדשנות לא רק במוצר אלא גם בתהליכי העבודה – הצגת מקצועיות ברמה עולמית.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>נושאי הסדנה (דוגמאות לתכנים)</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>עוזרי AI מתקדמים</h3>
+          <p>ChatGPT, Claude, Perplexity – שימוש בשאלות מורכבות, כתיבה, סיכום וניתוח תוכן בהתאמה לתחום החומרים והקיימות.</p>
+        </div>
+        <div class="card">
+          <h3>אוטומציות עם Make</h3>
+          <p>בניית תהליכים אוטומטיים לניהול עדכונים, תזכורות, ושיתוף נתונים בין כלים ומערכות.</p>
+        </div>
+        <div class="card">
+          <h3>Vibe-Coding</h3>
+          <p>פיתוח מהיר של כלים פנימיים (דשבורדים, מערכות מעקב, טפסים) ללא צורך בידע קוד מתקדם.</p>
+        </div>
+        <div class="card">
+          <h3>אפיון חכם של פרויקטים</h3>
+          <p>מתודולוגיה לתכנון פרויקט/ניסוי כך שיחסוך זמן וימנע טעויות בשלב הביצוע.</p>
+        </div>
+        <div class="card">
+          <h3>ניהול ידע ושיתוף בין צוותים</h3>
+          <p>כלים לחיבור בין אנשי מדע, עיצוב ושיווק כך שכל גורם יקבל את המידע בצורה מותאמת.</p>
+        </div>
+        <div class="card">
+          <h3>הפקת חומרים ויזואליים במהירות</h3>
+          <p>מצגות עם Gamma, הדמיות מוצר עם Ideogram, תצוגות תלת ממדיות לפרזנטציות.</p>
+        </div>
+      </div>
+      <div class="pill-list" style="margin-top: 14px;">
+        <span class="pill"><b>Hands-on</b> תרגול מעשי</span>
+        <span class="pill"><b>Real Data</b> חומרים אמיתיים מהחברה</span>
+        <span class="pill"><b>Live Demos</b> הדגמות חיות</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>מבנה הסדנה</h2>
+      <div class="subtle-card">
+        <ul class="clean">
+          <li>הצגת כלים רלוונטיים</li>
+          <li>הדגמות חיות</li>
+          <li>תרגול Hands-on עם חומרים אמיתיים מהחברה</li>
+          <li>זמן לשאלות והתאמה לצרכים של המשתתפים</li>
+          <li><strong>מספר משתתפים מומלץ:</strong> עד 15 בכל מפגש</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>עלות הסדנה</h2>
+      <div class="pricing">
+        <div class="muted">עלות למפגש</div>
+        <div class="price">6,000 ₪ + מע"מ</div>
+        <div class="muted">אפשרויות:</div>
+        <ul class="clean" style="margin-top:8px;">
+          <li>2 מפגשים: 12,000 ₪ + מע"מ</li>
+          <li>3 מפגשים: 18,000 ₪ + מע"מ</li>
+        </ul>
+      </div>
+      <div class="subtle-card" style="margin-top:14px;">
+        <h3 style="margin-bottom:8px; font-size:1.1rem;">המחיר כולל</h3>
+        <ul class="clean">
+          <li>אפיון צרכים לפני הסדנה (שאלון + שיחה עם נציגי הצוות)</li>
+          <li>התאמת תכנים ודוגמאות לעולם העבודה של Balena</li>
+          <li>חומרים דיגיטליים לכל המשתתפים</li>
+          <li>ליווי מקצועי במהלך כל המפגשים</li>
+          <li>הגעה ולוגיסטיקה</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>תנאי תשלום</h2>
+      <div class="subtle-card">
+        <ul class="clean">
+          <li>50% עם אישור ההצעה</li>
+          <li>50% לאחר המפגש האחרון</li>
+          <li>חשבונית תונפק כחוק</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2 style="margin-bottom: 8px;">אישור הצעת המחיר</h2>
+      <p>נשמח להוביל יחד סדנה מעשית, מעודכנת ומותאמת לצוות Balena.</p>
+      <button class="cta-btn" onclick="openApprovalModal()">אישור ההצעה</button>
+      <div id="successMessage" class="success">הצעת המחיר אושרה. ניצור קשר בהקדם.</div>
+    </section>
+
+    <section class="contact">
+      <h2 style="color:#fff; margin-bottom: 10px;">עידו שגב</h2>
+      <div>מוביל תחום בינה מלאכותית בעסקים</div>
+      <div class="links">
+        <a href="tel:0547667775">טלפון: 054-766-7775</a>
+        <a href="mailto:triroars@gmail.com">מייל: triroars@gmail.com</a>
+        <a href="https://wa.me/972547667775" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div id="approvalModal" class="modal-overlay">
+    <div class="modal">
+      <button class="close-x" onclick="closeApprovalModal()" aria-label="סגירה">&times;</button>
+      <h3>פרטי המאשר</h3>
+      <form id="approvalForm">
+        <div class="form-group">
+          <label for="approverName">שם מלא *</label>
+          <input id="approverName" name="approverName" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="approverTitle">תפקיד *</label>
+          <input id="approverTitle" name="approverTitle" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="approverEmail">אימייל *</label>
+          <input id="approverEmail" name="approverEmail" type="email" required />
+        </div>
+        <div class="form-group">
+          <label for="approverPhone">טלפון</label>
+          <input id="approverPhone" name="approverPhone" type="tel" />
+        </div>
+        <div class="form-group">
+          <label for="organizationDepartment">מחלקה/אגף</label>
+          <input id="organizationDepartment" name="organizationDepartment" type="text" />
+        </div>
+        <div class="form-group">
+          <label for="notes">הערות נוספות</label>
+          <textarea id="notes" name="notes" placeholder="הערות, שאלות או בקשות מיוחדות..."></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" onclick="closeApprovalModal()">ביטול</button>
+          <button type="submit" class="btn primary">אישור סופי</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Date
+    function setCurrentDate() {
+      const now = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+      document.getElementById('currentDate').textContent = now.toLocaleDateString('he-IL', options);
+    }
+
+    // Modal logic
+    function openApprovalModal() {
+      document.getElementById('approvalModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeApprovalModal() {
+      document.getElementById('approvalModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      document.getElementById('approvalForm').reset();
+    }
+    document.getElementById('approvalModal').addEventListener('click', (e) => {
+      if (e.target.id === 'approvalModal') closeApprovalModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('approvalModal').style.display === 'block') closeApprovalModal();
+    });
+
+    // Submit
+    document.getElementById('approvalForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('.btn.primary');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'שולח...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(e.target);
+      const approver = {};
+      for (const [k, v] of formData.entries()) approver[k] = v;
+
+      try {
+        const res = await fetch('https://hook.eu2.make.com/6qwapfnavfh2464dbm545tbse7o52yct', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'quote_approval',
+            organization: 'Balena',
+            presenter: 'עידו שגב',
+            workshop: 'סדנת AI ואוטומציה לצוות Balena',
+            date: new Date().toISOString(),
+            amountPerSession: '6,000 ₪ + מע"מ',
+            sessions: '2 או 3',
+            approver
+          })
+        });
+
+        if (!res.ok) throw new Error('Network response was not ok');
+        closeApprovalModal();
+        const msg = document.getElementById('successMessage');
+        msg.style.display = 'block';
+        document.querySelector('.cta-btn').style.display = 'none';
+        msg.scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        submitBtn.textContent = 'שגיאה - נסה שוב';
+        setTimeout(() => { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 2500);
+      }
+    });
+
+    // Init
+    window.addEventListener('load', setCurrentDate);
+  </script>
+</body>
+</html>
